@@ -1,19 +1,11 @@
-var Request = require('request')
+const axios = require('axios')
 
-function makeDriver(opts) {
-	if (typeof opts === "function") {
-		var request = opts
-	} else {
-		var request = Request.defaults(opts)
-	}	
+module.exports = (opts) => {
+  const request = typeof opts === 'function' ? opts : axios.create(opts)
 
-	return function driver(context, callback) {
-		var url = context.url
-
-		request(url, function(err, response, body) {
-			return callback(err, body)
-		})
-	}
+  return function driver(context, callback) {
+    request(context.url)
+      .then(({ data }) => callback(null, data))
+      .catch(callback)
+  }
 }
-
-module.exports = makeDriver

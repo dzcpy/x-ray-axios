@@ -1,41 +1,45 @@
-# request-x-ray
-[![Build Status](https://travis-ci.org/Crazometer/request-x-ray.svg?branch=master)](https://travis-ci.org/Crazometer/request-x-ray)
+# x-ray-axios
 
-Simple [request](https://github.com/request/request) driver for [x-ray](https://github.com/lapwinglabs/x-ray). Useful for storing cookies, setting custom headers, and changing HTTP methods.
+Simple [axios](https://axios-http.com) driver for [x-ray](https://github.com/lapwinglabs/x-ray). Useful for storing cookies, setting custom headers, and changing HTTP methods.
 
 ## Installation
 
 ```
-npm install request-x-ray
+npm install x-ray-axios
+#yan add x-ray-axios
 ```
 
 ## Usage
 
 ```js
 const x = require('x-ray')()
-const makeDriver = require('request-x-ray')
+const makeDriver = require('x-ray-axios')
 
 const options = {
-	method: "GET", 						//Set HTTP method
-	jar: true, 							//Enable cookies
-	headers: {							//Set headers
-		"User-Agent": "Firefox/48.0"
-	}
+  method: 'GET', //Set HTTP method
+  headers: {
+    //Set headers
+    'User-Agent': 'Firefox/48.0',
+  },
 }
 
-const driver = makeDriver(options)		//Create driver
+const driver = makeDriver(options) //Create driver
 
-x.driver(driver)						//Set driver
+x.driver(driver) //Set driver
 
-x("http://www.google.com", "title")(function(err, res) {
-	console.log("Page retrieved with request!")
+x(
+  'http://www.google.com',
+  'title'
+)(function (err, res) {
+  console.log('Page retrieved with request!')
 })
 ```
+
 ## API
 
 ### makeDriver([opts|fn])
 
-Creates a driver to be used by `xray.driver()`. Possible arguments are a request [options object](https://github.com/request/request#requestoptions-callback) or a `request` instance e.g. `request.defaults()`.
+Creates a driver to be used by `xray.driver()`. Possible arguments are a axios [options object](https://github.com/axios/axios#axioscreateconfig) or a `axios` instance e.g. `axios.create()`.
 
 ## License
 
